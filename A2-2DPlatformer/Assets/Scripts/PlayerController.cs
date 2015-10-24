@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour {
 				this._animator.SetInteger("AnimState", 2);
 				if(absVelY < this.velocityRange.vMax) {
 					forceY = this.jump;
-					this._jumpSound.Play();
+					//this._jumpSound.Play();
 					this._isGrounded = false;
 				}
 			}
