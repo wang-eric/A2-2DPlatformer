@@ -191,7 +191,7 @@ MonoBehaviour:
   - {fileID: 474182}
   - {fileID: 431348}
   - {fileID: 476968}
-  coin: {fileID: 156738, guid: 8df341ab8794f554e854f75f3582a846, type: 2}
+  coin: {fileID: 191578, guid: c2d1758191afaa94490e28096eebf6eb, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -203,6 +203,10 @@ Prefab:
       propertyPath: m_TagString
       value: Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: coin
+      value: 
+      objectReference: {fileID: 191578, guid: c2d1758191afaa94490e28096eebf6eb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181300}

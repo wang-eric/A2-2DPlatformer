@@ -19,6 +19,7 @@ public class SimplePlatformController : MonoBehaviour {
 	private AudioSource[] _audioSources;
 	private AudioSource _coinSound;
 	private AudioSource _jumpSound;
+	private AudioSource _walkSound;
 
 	
 	// Use this for initialization
@@ -28,6 +29,7 @@ public class SimplePlatformController : MonoBehaviour {
 		this._audioSources = gameObject.GetComponents<AudioSource> ();
 		this._coinSound = this._audioSources[0];
 		this._jumpSound = this._audioSources [1];
+		this._walkSound = this._audioSources [2];
 	}
 	
 	// Update is called once per frame
@@ -65,8 +67,9 @@ public class SimplePlatformController : MonoBehaviour {
 		float h = Input.GetAxis ("Horizontal");
 		//if (h != 0 || rb2d.velocity.x !=0 ) {
 		if (h != 0) {
-
 			anim.SetInteger ("AnimState", 1);
+			if (grounded && !this._walkSound.isPlaying)
+				this._walkSound.Play();
 			if (h * rb2d.velocity.x < maxSpeed)
 				rb2d.AddForce (Vector2.right * h * moveForce);
 			if (Mathf.Abs (rb2d.velocity.x) > maxSpeed)

@@ -28,9 +28,9 @@ TagManager:
   - Enemies
   - Pickups
   - Ground
-  - 
-  - 
-  - 
+  - Wall
+  - PlayerHead
+  - Background image
   - 
   - 
   - 
