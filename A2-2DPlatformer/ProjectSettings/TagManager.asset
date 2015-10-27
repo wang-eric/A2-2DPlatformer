@@ -23,7 +23,7 @@ TagManager:
   - UI
   - 
   - 
-  - Bombs
+  - DeathTrigger
   - Player
   - Enemies
   - Pickups
@@ -31,7 +31,7 @@ TagManager:
   - Wall
   - PlayerHead
   - Background image
-  - 
+  - Finish
   - 
   - 
   - 

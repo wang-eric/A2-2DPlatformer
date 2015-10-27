@@ -49,7 +49,9 @@
      <Compile Include="Assets\Scripts\DeathTrigger.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\EnemyController1.cs" />
-     <Compile Include="Assets\Scripts\GroundFlipControl.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\GameOverController.cs" />
+     <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\PlatformControllerHorizontal.cs" />
      <Compile Include="Assets\Scripts\PlatformControllerVertical.cs" />
      <Compile Include="Assets\Scripts\PlatformFall.cs" />
@@ -58,11 +60,17 @@
      <Compile Include="Assets\Scripts\SpawnCoins.cs" />
      <Compile Include="Assets\Scripts\SpawnManager.cs" />
      <None Include="Assets\Fonts\kirbynokirakizzu.txt" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>D:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

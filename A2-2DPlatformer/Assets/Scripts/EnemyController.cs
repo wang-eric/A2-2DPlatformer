@@ -30,8 +30,17 @@ public class EnemyController : MonoBehaviour {
 	private bool hittingPlayerTop;
 	private bool enemyKilled = false;
 
+	private GameController gameController;
+
 	// Use this for initialization
 	void Start () {
+		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
+		if (gameControllerObject != null) {
+			gameController = gameControllerObject.GetComponent <GameController>();
+		}
+		if (gameController == null) {
+			Debug.Log ("Cannot find 'GameController' script");
+		}
 		this._rigidbody2D = gameObject.GetComponent<Rigidbody2D> ();
 		this._transform = gameObject.GetComponent<Transform> ();
 		this._animator = gameObject.GetComponent<Animator> ();
@@ -49,18 +58,33 @@ public class EnemyController : MonoBehaviour {
 				|| (Physics2D.OverlapCircle (topCheck2.position, checkRadius, whatIsPlayer))
 				|| (Physics2D.OverlapCircle (topCheck3.position, checkRadius, whatIsPlayer));
 
+			// Check for the edge
 			notAtEdge = Physics2D.OverlapCircle (edgeCheck.position, checkRadius, whatIsWall);
+			// Move to one direct if the zombie is not hitting a wall or near the edge
 			if (hittingWall || !notAtEdge) {
 				moveRight = !moveRight;
 			}
 
-			if (hittingPlayerFront || hittingPlayerBack)
-				Application.LoadLevel (Application.loadedLevel);
+			// Player get killed when hit by a zombie
+			if (hittingPlayerFront || hittingPlayerBack){
+				gameController.RemoveLife();
+				if (gameController.GetLife() == 0) {
+					//Destroy(other.gameObject);
+					gameController.GameOver();
+				}
+				else
+				{
+					gameController.RespawnTrigger();
+				}
+			}
 		}
+
+		// Kill zombies when the player jump on their heads
 		if (hittingPlayerTop) {
 			GetComponent<AudioSource> ().Play ();
 			//this.gameObject.GetComponent<Renderer> ().enabled = false;
 			gameObject.GetComponent<CircleCollider2D> ().enabled = false;
+			gameController.AddScore(50);
 			Destroy (gameObject, 1f);
 			hittingPlayerTop=false;
 			enemyKilled = true;

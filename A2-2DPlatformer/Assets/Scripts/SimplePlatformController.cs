@@ -12,8 +12,12 @@ public class SimplePlatformController : MonoBehaviour {
 	public Transform groundCheck;
 
 	private bool grounded = false;
+	private bool fallOff = false;
+	private bool win = false;
 	private float groundRadius = 0.5f;
 	public LayerMask whatIsGround;
+	public LayerMask whatIsDeathTrigger;
+	public LayerMask whatIsFinish;
 	private Animator anim;
 	private Rigidbody2D rb2d;
 	private AudioSource[] _audioSources;
@@ -21,7 +25,8 @@ public class SimplePlatformController : MonoBehaviour {
 	private AudioSource _jumpSound;
 	private AudioSource _walkSound;
 
-	
+	private GameController gameController;
+
 	// Use this for initialization
 	void Awake () {
 		anim = GetComponent<Animator> ();
@@ -30,6 +35,10 @@ public class SimplePlatformController : MonoBehaviour {
 		this._coinSound = this._audioSources[0];
 		this._jumpSound = this._audioSources [1];
 		this._walkSound = this._audioSources [2];
+		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
+		if (gameControllerObject != null) {
+			gameController = gameControllerObject.GetComponent <GameController>();
+		}
 	}
 	
 	// Update is called once per frame
@@ -50,23 +59,37 @@ public class SimplePlatformController : MonoBehaviour {
 
 
 	void Update () {
-		Debug.Log ("grounded");
-		Debug.Log (grounded);
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
-
+		fallOff = Physics2D.OverlapCircle (groundCheck.position, 10f, whatIsDeathTrigger);
+		win = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsFinish);
 		if (Input.GetButtonDown ("Jump") && grounded) {
 			jump = true;
 			grounded = false;
-			Debug.Log ("jump1");
-			Debug.Log (jump);
+		}
+		// When the player fall off the edge, life -1, respawn the player at the last checkpoint, 
+		// or end the game when the player runs out of life.
+		if (fallOff) {
+			gameController.RemoveLife ();
+			if (gameController.GetLife () == 0) {
+				//Destroy(other.gameObject);
+				gameController.GameOver();
+			} else {
+				gameController.RespawnTrigger ();
+				transform.position = gameController.GetSpawnPoint();
+				gameController.RespawnTrigger();
+			}
+		}
+		if (win) {
+			gameController.Win();
 		}
 	}
 
 	void FixedUpdate()
 	{
+		// Player movement
 		float h = Input.GetAxis ("Horizontal");
-		//if (h != 0 || rb2d.velocity.x !=0 ) {
 		if (h != 0) {
+			// Play Walk animation
 			anim.SetInteger ("AnimState", 1);
 			if (grounded && !this._walkSound.isPlaying)
 				this._walkSound.Play();
@@ -75,23 +98,34 @@ public class SimplePlatformController : MonoBehaviour {
 			if (Mathf.Abs (rb2d.velocity.x) > maxSpeed)
 				rb2d.velocity = new Vector2 (Mathf.Sign (rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 		} else{
+			// Play Idle animation
 			anim.SetInteger ("AnimState", 0);
 		}
+		// Flip the player sprite base on the facing direction
 		if (h>0 && !facingRight)
 			Flip ();
 		else if (h<0 && facingRight)
 			Flip ();
 		if (jump){
+			// Play jump sound
 			this._jumpSound.Play();
+			// Apply jump force
 			rb2d.AddForce (new Vector2(0f,jumpForce));
 			jump = false;
+			// Set grounded back to true to avoid double jump
 			grounded = true;
+			// Play jump animation
 			anim.SetInteger ("AnimState", 2);
-			Debug.Log ("grounded");
-			Debug.Log (grounded);
+
+		}
+		if (gameController.respawn) {
+			// Check if the player needs to be respawned (after getting hit by zombie.
+			transform.position = gameController.GetSpawnPoint();
+			gameController.RespawnTrigger();
 		}
 	}
 
+	// Flips the player sprite
 	void Flip()
 	{
 		facingRight = !facingRight;

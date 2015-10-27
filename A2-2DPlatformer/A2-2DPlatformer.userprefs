@@ -1,18 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SimplePlatformController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\Game Programming A1\GitHub\A1-SpaceShooter\Assets\Scripts\PlayerController.cs">
     <Files>
-      <File FileName="Assets\Scripts\EnemyController.cs" Line="61" Column="41" />
-      <File FileName="Assets\Scripts\SpawnCoins.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Coin.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SpawnManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SimplePlatformController.cs" Line="71" Column="20" />
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlatformFall.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DeathTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlatformControllerHorizontal.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlatformControllerVertical.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GroundFlipControl.cs" Line="10" Column="27" />
+      <File FileName="..\..\..\Game Programming A1\GitHub\A1-SpaceShooter\Assets\Scripts\PlayerController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
